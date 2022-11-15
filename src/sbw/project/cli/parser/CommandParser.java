@@ -9,21 +9,10 @@ import sbw.project.cli.action.ActionSet;
  */
 public class CommandParser implements CommandParserConstants {
 
-	/**
-	 * Next token.
-	 */
-	private Token jj_nt;
 
-	/**
-	 * Current token.
-	 */
-	private Token token;
+	private ActionSet actionSet;
 
-	/**
-	 * Generated Token Manager.
-	 */
-	private CommandParserTokenManager token_source;
-
+	private String text;
 	/**
 	 * Create your parser. The ActionSet and command string are provided to you
 	 * automatically. Do not do the parsing here.
@@ -33,13 +22,29 @@ public class CommandParser implements CommandParserConstants {
 	 */
 	public CommandParser(final ActionSet actionSet, final String text) {
 		System.out.println("YOUR PARSER: CONSTRUCTOR");
-
+		this.actionSet = actionSet;
+		this.text = text;
+		this.parse();
 	}
 
 	/**
 	 * Do the parsing.
 	 */
 	public void parse() {
+
 		System.out.println("YOUR PARSER: PARSE");
+
+		CommandParser c;
+
+		String actionWord = this.text[0].toUpperCase();
+		switch(actionWord) {
+			case "CREATE":
+				c = new CommandParserCreational(actionSet, text);
+				break;
+			default:
+				c = new CommandParserMiscellaneous(actionSet, text);
+		}
+			c.parse();
+
 	}
 }
