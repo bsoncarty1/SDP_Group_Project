@@ -2,48 +2,28 @@ package sbw.project.cli.parser;
 
 import sbw.project.cli.action.ActionSet;
 
-public class CommandParser {
-	
+/**
+ * Defines the parser that interprets and processes the commands according to
+ * Project Part 1.
+ * 
+ */
+public class CommandParser implements CommandParserConstants {
+
 	/**
-	 * A nonnegative real in appropriate units per clock tick
+	 * Next token.
 	 */
-	private Acceleration acceleration;
-	
+	private Token jj_nt;
+
 	/**
-	 * A nonnegative real in degrees
+	 * Current token.
 	 */
-	private Angle angle;
-	
+	private Token token;
+
 	/**
-	 * An arbitrary alphanumeric identifier, like Java variables
+	 * Generated Token Manager.
 	 */
-	private Identifier id;
-	
-	/**
-	 * A real in percent [0,100]
-	 */
-	private Percent percent;
-	
-	/**
-	 * A closed set of flap positions [up,1,2,3,4]
-	 */
-	private Position position;
-	
-	/**
-	 * A real in percent [0,100]
-	 */
-	private Power power;
-	
-	/**
-	 * A positive integer clock rate
-	 */
-	private Rate rate;
-	
-	/**
-	 * A positive real in appropriate units per clock tick
-	 */
-	private Speed speed;
-	
+	private CommandParserTokenManager token_source;
+
 	/**
 	 * Create your parser. The ActionSet and command string are provided to you
 	 * automatically. Do not do the parsing here.
@@ -53,6 +33,7 @@ public class CommandParser {
 	 */
 	public CommandParser(final ActionSet actionSet, final String text) {
 		System.out.println("YOUR PARSER: CONSTRUCTOR");
+
 	}
 
 	/**
