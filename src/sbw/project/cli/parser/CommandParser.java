@@ -9,10 +9,21 @@ import sbw.project.cli.action.ActionSet;
  */
 public class CommandParser {
 
-
+/**
+	 * The ActionSet passed in
+	 */
 	private ActionSet actionSet;
 
+	/**
+	 * The full command String that was passed in
+	 */
 	private String text;
+
+	/**
+	 * The specific parser based on the first word
+	 */
+	private CommandParser parser;
+
 	/**
 	 * Create your parser. The ActionSet and command string are provided to you
 	 * automatically. Do not do the parsing here.
@@ -21,7 +32,6 @@ public class CommandParser {
 	 * @param text
 	 */
 	public CommandParser(final ActionSet actionSet, final String text) {
-		System.out.println("YOUR PARSER: CONSTRUCTOR");
 		this.actionSet = actionSet;
 		this.text = text;
 		this.parse();
@@ -31,27 +41,64 @@ public class CommandParser {
 	 * Do the parsing.
 	 */
 	public void parse() {
+		String actionWord = this.text.split()[0].toUpperCase().trim();
+		CommandParser parser;
+		
+		if (actionWord.equals("CREATE")) 
+			parser = new CommandParserCreational(actionSet, text);
+		
+		else if (actionWord.equals("DECLARE") || actionWord.equals("COMMIT"))
+			parser = new CommandParserStructural(actionSet, text);
+		
+		else if (actionWord.equals("DO") || actionWord.equals("HALT"))
+			parser = new CommandParserBehavioral(actionSet, text);
+		
+		else if (actionWord.equals("@CLOCK") || actionWord.equals("@RUN")|| actionWord.equals("@EXIT")|| actionWord.equals("@WAIT")
+			parser =  new CommandParserMiscellaneous(actionSet, text);
+		
+		else
+			throw new IllegalArgumentException("Parser was not given a correct action word");					
+		
 
-		System.out.println("YOUR PARSER: PARSE");
+		parser.parse();
 
-		CommandParser c;
+	}
 
-		String[] textArr = text.split(" ");
-		String actionWord = textArr[0].toUpperCase();
-		switch(actionWord) {
-			case "CREATE":
-				new CommandParserCreational(actionSet, text);
-				break;
-			case "DECLARE":
-				new CommandParserStructural(actionSet, text);
-				break;
-			case "DO":
-				new CommandParserBehavioral(actionSet, text);
-				break;
-			case "@":
-				new CommandParserMiscellaneous(actionSet, text);
-				break;
+	protected ActionSet getActionSet() {
+		return this.actionSet;
+	}
+
+	protected String getText() {
+		return this.text;
+	}
+
+	/**
+	 * Given a full command string and an attribute String, will return the string
+	 * after the first occurance of "attribute".
+	 * 
+	 * @param text
+	 * @return
+	 */
+	protected String getAttributeAfter(final String command, final String attribute) {
+		if (command.indexOf(attribute) > -1) {
+			String[] s = command.substring(command.indexOf(attribute)).split();
+			return s[1].trim();
 		}
+		return "NOT FOUND";
+	}
 
+	/**
+	 * Given a full command string and an attribute String, will return the string
+	 * before the first occurance of "attribute".
+	 * 
+	 * @param text
+	 * @return
+	 */
+	protected String getAttributeBefore(final String command, final String attribute) {
+		if (command.indexOf(attribute) > -1) {
+			String[] s = command.substring(0, command.indexOf(attribute)).split();
+			return s[s.length].trim();
+		}
+		return "NOT FOUND";
 	}
 }
