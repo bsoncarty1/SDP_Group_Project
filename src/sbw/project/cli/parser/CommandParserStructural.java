@@ -25,6 +25,12 @@ public class CommandParserStructural extends CommandParser{
             Aileron(actionSet, textArr);
         }else if(textArr[1].equalsIgnoreCase("FLAP")) {
             Flap(actionSet, textArr);
+        }else if(textArr[1].equalsIgnoreCase("ENGINE")) {
+            Engine(actionSet, textArr);
+        }else if(textArr[1].equalsIgnoreCase("GEAR")) {
+            Gear(actionSet, textArr);
+        }else{
+            System.out.println("Error in CommandParserStructural.");
         }
     }
 
@@ -67,7 +73,26 @@ public class CommandParserStructural extends CommandParser{
         a.getActionStructural().doDeclareFlapController(id,list);
     }
 
+    public void Engine(ActionSet a, String[] textArr){
+        Identifier id = new Identifier(textArr[3]);
+        int i = 6;
+        ArrayList<Identifier> list = new ArrayList<>();
+        while(i < textArr.length){
+            Identifier idn = new Identifier(textArr[i]);//TODO: this can have one or more
+            list.add(idn);
+            i++;
+        }
+        a.getActionStructural().doDeclareEngineController(id,list);
+    }
 
+    public void Gear(ActionSet a, String[] textArr){
+        Identifier id1 = new Identifier(textArr[3]);
+        Identifier id2 = new Identifier(textArr[7]);
+        Identifier id3 = new Identifier(textArr[9]);
+        Identifier id4 = new Identifier(textArr[10]);
+
+        a.getActionStructural().doDeclareGearController(id1,id2,id3,id4);
+    }
 
 
 }
