@@ -53,7 +53,7 @@ public class CommandParser {
 		else if (actionWord.equals("DO") || actionWord.equals("HALT"))
 			parser = new CommandParserBehavioral(actionSet, text);
 		
-		else if (actionWord.equals("@CLOCK") || actionWord.equals("@RUN")|| actionWord.equals("@EXIT")|| actionWord.equals("@WAIT")
+		else if (actionWord.equals("@CLOCK") || actionWord.equals("@EXIT")|| actionWord.equals("@WAIT")
 			parser =  new CommandParserMiscellaneous(actionSet, text);
 		
 		else
