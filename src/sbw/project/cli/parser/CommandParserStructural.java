@@ -18,8 +18,10 @@ public class CommandParserStructural extends CommandParser{
         String[] textArr = text.split(" ");
         if(textArr[1].equalsIgnoreCase("RUDDER")){
             Rudder(actionSet, textArr);
-        }else if(textArr[1].equalsIgnoreCase("ELEVATOR"){
+        }else if(textArr[1].equalsIgnoreCase("ELEVATOR")){
             Elevator(actionSet, textArr);
+        }else if(textArr[1].equalsIgnoreCase("AILERON")) {
+            Aileron(actionSet, textArr);
         }
     }
 
@@ -35,4 +37,21 @@ public class CommandParserStructural extends CommandParser{
         Identifier id3 = new Identifier(textArr[7]);
         a.getActionStructural().doDeclareElevatorController(id1,id2,id3);
     }
+
+
+    //TODO: adapt code, can be multiple ailerons
+    public void Aileron(ActionSet a, String[] textArr){
+        Identifier id1 = new Identifier(textArr[3]);
+        Identifier idn = new Identifier(textArr[6]); //This can have one or more
+        Identifier idx = new Identifier(textArr[7]); //This can have 0 or more
+        /**TODO: Instructions:
+        //Creates a ControllerAileron with identifier id1 containing n ailerons idn, where n is even. The first half of n in order are on the left wing, and the second half on the right. idx specifies which of idn is the primary one that is directly
+        //commanded by a request to this controller. It must be on the left wing. The others respond based on it: all ailerons on the same side deflect in the same direction, and all on the opposite side deflect in the opposite direction (except when used as a speed brake; see III.3.b). idslave optionally bases its deflection (and likewise its opposite's) on idmaster by percent percent. Any chain of mixing is possible, but there are no cyclical relationships. Aileron configurations must be symmetrically identical.
+        //This calls two variants of doDeclareAileronController(), which creates and registers an instance of ControllerAileron.
+        **/
+
+    }
+
+
+
 }
