@@ -47,7 +47,11 @@ public class CommandParserCreational extends CommandParser{
     }
 
     private void CreateElevator(ActionSet actionSet, String[] textArr) {
-
+        Identifier id1 = new Identifier(textArr[2]);
+        Angle angle = new Angle(Double.parseDouble(textArr[5]));
+        Speed speed = new Speed(Double.parseDouble(textArr[7]));
+        Acceleration acceleration = new Acceleration(Double.parseDouble(textArr[9]));
+        actionSet.getActionCreational().doCreateElevator(id1,angle,speed,acceleration);
     }
 
     private void CreateRudder(ActionSet actionSet, String[] textArr) {
