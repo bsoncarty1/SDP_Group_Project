@@ -7,7 +7,7 @@ import sbw.project.cli.action.ActionSet;
  * Project Part 1.
  * 
  */
-public class CommandParser implements CommandParserConstants {
+public class CommandParser {
 
 
 	private ActionSet actionSet;
