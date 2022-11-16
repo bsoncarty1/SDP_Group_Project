@@ -1,5 +1,9 @@
 package sbw.project.cli.parser;
 
+import sbw.architecture.datatype.Acceleration;
+import sbw.architecture.datatype.Angle;
+import sbw.architecture.datatype.Identifier;
+import sbw.architecture.datatype.Speed;
 import sbw.project.cli.action.ActionSet;
 
 public class CommandParserCreational extends CommandParser{
@@ -43,8 +47,14 @@ public class CommandParserCreational extends CommandParser{
     }
 
     private void CreateElevator(ActionSet actionSet, String[] textArr) {
+
     }
 
     private void CreateRudder(ActionSet actionSet, String[] textArr) {
+        Identifier id1 = new Identifier(textArr[2]);
+        Angle angle = new Angle(Double.parseDouble(textArr[5]));
+        Speed speed = new Speed(Double.parseDouble(textArr[7]));
+        Acceleration acceleration = new Acceleration(Double.parseDouble(textArr[9]));
+        actionSet.getActionCreational().doCreateRudder(id1,angle,speed,acceleration);
     }
 }
