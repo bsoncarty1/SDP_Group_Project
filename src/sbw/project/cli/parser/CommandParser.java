@@ -36,15 +36,22 @@ public class CommandParser implements CommandParserConstants {
 
 		CommandParser c;
 
-		String actionWord = this.text[0].toUpperCase();
+		String[] textArr = text.split(" ");
+		String actionWord = textArr[0].toUpperCase();
 		switch(actionWord) {
 			case "CREATE":
-				c = new CommandParserCreational(actionSet, text);
+				new CommandParserCreational(actionSet, text);
 				break;
-			default:
-				c = new CommandParserMiscellaneous(actionSet, text);
+			case "DECLARE":
+				new CommandParserStructural(actionSet, text);
+				break;
+			case "DO":
+				new CommandParserBehavioral(actionSet, text);
+				break;
+			case "@":
+				new CommandParserMiscellaneous(actionSet, text);
+				break;
 		}
-			c.parse();
 
 	}
 }
