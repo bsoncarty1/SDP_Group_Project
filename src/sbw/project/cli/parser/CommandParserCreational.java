@@ -44,6 +44,12 @@ public class CommandParserCreational extends CommandParser{
     }
 
     private void CreateAileron(ActionSet actionSet, String[] textArr) {
+        Identifier id = new Identifier(textArr[2]);
+        Angle angle1 = new Angle(Double.parseDouble(textArr[6]));
+        Angle angle2 = new Angle(Double.parseDouble(textArr[8]));
+        Speed speed = new Speed(Double.parseDouble(textArr[10]));
+        Acceleration acceleration = new Acceleration(Double.parseDouble(textArr[12]));
+        actionSet.getActionCreational().doCreateAileron(id,angle1,angle2,speed,acceleration);
     }
 
     private void CreateElevator(ActionSet actionSet, String[] textArr) {
