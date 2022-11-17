@@ -17,11 +17,11 @@ public class CommandParserCreational extends CommandParser{
             CreateElevator(actionSet, textArr);
         }else if(textArr[1].equalsIgnoreCase("AILERON")) {
             CreateAileron(actionSet, textArr);
-        }else if(textArr[1].equalsIgnoreCase("FLAP")) {
+        }else if(textArr[1].equalsIgnoreCase("SPLIT") ||textArr[1].equalsIgnoreCase("FOWLER")) {
             CreateFlap(actionSet, textArr);
         }else if(textArr[1].equalsIgnoreCase("ENGINE")) {
             CreateEngine(actionSet, textArr);
-        }else if(textArr[1].equalsIgnoreCase("GEAR")) {
+        }else if(textArr[1].equalsIgnoreCase("NOSE") || textArr[1].equalsIgnoreCase("MAIN")) {
             CreateGear(actionSet, textArr);
         }else{
             System.out.println("Error in CommandParserCreational.");
@@ -29,6 +29,8 @@ public class CommandParserCreational extends CommandParser{
     }
 
     private void CreateGear(ActionSet actionSet, String[] textArr) {
+
+
 
     }
 
