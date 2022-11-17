@@ -41,6 +41,14 @@ public class CommandParserCreational extends CommandParser{
     }
 
     private void CreateFlap(ActionSet actionSet, String[] textArr) {
+        Identifier id = new Identifier(textArr[3]);
+        Angle angle = new Angle(Double.parseDouble(textArr[6]));
+        Speed speed = new Speed(Double.parseDouble(textArr[8]));
+        Acceleration acceleration = new Acceleration(Double.parseDouble(textArr[10]));
+
+        boolean fowler = textArr[1].equalsIgnoreCase("FOWLER");
+
+        actionSet.getActionCreational().doCreateFlap(id,fowler,angle,speed,acceleration);
     }
 
     private void CreateAileron(ActionSet actionSet, String[] textArr) {
