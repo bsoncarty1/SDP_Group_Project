@@ -29,9 +29,15 @@ public class CommandParserCreational extends CommandParser{
     }
 
     private void CreateGear(ActionSet actionSet, String[] textArr) {
+        Identifier identifier = new Identifier(textArr[3]);
+        Speed speed = new Speed(Double.parseDouble(textArr[6]));
+        Acceleration acceleration = new Acceleration(Double.parseDouble(textArr[8]));
 
-
-
+        if(textArr[1].equalsIgnoreCase("NOSE")){
+            actionSet.getActionCreational().doCreateGearNose(identifier,speed,acceleration);
+        }else{
+            actionSet.getActionCreational().doCreateGearMain(identifier,speed,acceleration);
+        }
     }
 
     private void CreateEngine(ActionSet actionSet, String[] textArr) {
