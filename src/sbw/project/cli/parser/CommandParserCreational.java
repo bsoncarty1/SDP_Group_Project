@@ -7,7 +7,7 @@ import sbw.architecture.datatype.Speed;
 import sbw.project.cli.action.ActionSet;
 
 public class CommandParserCreational extends CommandParser{
-    
+
     public CommandParserCreational(ActionSet actionSet, String text) {
         super(actionSet, text);
         String[] textArr = text.split(" ");
@@ -24,11 +24,12 @@ public class CommandParserCreational extends CommandParser{
         }else if(textArr[1].equalsIgnoreCase("GEAR")) {
             CreateGear(actionSet, textArr);
         }else{
-            System.out.println("Error in CommandParserStructural.");
+            System.out.println("Error in CommandParserCreational.");
         }
     }
 
     private void CreateGear(ActionSet actionSet, String[] textArr) {
+
     }
 
     private void CreateEngine(ActionSet actionSet, String[] textArr) {
