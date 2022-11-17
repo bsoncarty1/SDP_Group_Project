@@ -7,13 +7,7 @@ import sbw.architecture.datatype.Speed;
 import sbw.project.cli.action.ActionSet;
 
 public class CommandParserCreational extends CommandParser{
-    /**
-     * Create your parser. The ActionSet and command string are provided to you
-     * automatically. Do not do the parsing here.
-     *
-     * @param actionSet
-     * @param text
-     */
+    
     public CommandParserCreational(ActionSet actionSet, String text) {
         super(actionSet, text);
         String[] textArr = text.split(" ");
@@ -38,6 +32,10 @@ public class CommandParserCreational extends CommandParser{
     }
 
     private void CreateEngine(ActionSet actionSet, String[] textArr) {
+        Identifier id = new Identifier(textArr[2]);
+        Speed speed = new Speed(Double.parseDouble(textArr[5]));
+        Acceleration acceleration = new Acceleration(Double.parseDouble(textArr[7]));
+        actionSet.getActionCreational().doCreateEngine(id,speed,acceleration);
     }
 
     private void CreateFlap(ActionSet actionSet, String[] textArr) {
