@@ -53,7 +53,7 @@ public class CommandParser {
 		else if (actionWord.equals("DO") || actionWord.equals("HALT"))
 			parser = new CommandParserBehavioral(actionSet, text);
 		
-		else if (actionWord.equals("@CLOCK") || actionWord.equals("@EXIT")|| actionWord.equals("@WAIT")
+		else if (actionWord.equals("@CLOCK") || actionWord.equals("@EXIT")|| actionWord.equals("@WAIT"))
 			parser =  new CommandParserMiscellaneous(actionSet, text);
 		
 		else
@@ -75,8 +75,8 @@ public class CommandParser {
 	/**
 	 * Given a full command string and an attribute String, will return the string
 	 * after the first occurance of "attribute".
-	 * 
-	 * @param text
+	 *
+	 * @param
 	 * @return
 	 */
 	protected String getAttributeAfter(final String command, final String attribute) {
@@ -91,7 +91,7 @@ public class CommandParser {
 	 * Given a full command string and an attribute String, will return the string
 	 * before the first occurance of "attribute".
 	 * 
-	 * @param text
+	 * @param
 	 * @return
 	 */
 	protected String getAttributeBefore(final String command, final String attribute) {
