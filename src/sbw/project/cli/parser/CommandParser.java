@@ -37,12 +37,54 @@ public class CommandParser {
 		this.parse();
 	}
 
+	   //must make all letters uppercase before, or else add a-z
+	public static boolean isCommand(String command){
+		ArrayList<Pattern> list = new ArrayList<>();
+		//Creational REGEX
+		//need to fix some if angle is string
+		list.add(Pattern.compile("CREATE[\\s]+RUDDER[\\s]+WITH[\\s]+LIMIT[\\s]+[0-9A-Z]+[\\s]+SPEED[\\s]+[0-9]+[\\s]+ACCELERATION[\\s]+[0-9]+"));
+		list.add(Pattern.compile("CREATE[\\s]+ELEVATOR[\\s]+WITH[\\s]+LIMIT[\\s]+[0-9]+[\\s]+SPEED[\\s]+[0-9]+[\\s]+ACCELERATION[\\s]+[0-9]+"));
+		list.add(Pattern.compile("CREATE[\\s]+AILERON[\\s]+[0-9A-Z]+[\\s]+WITH[\\s]+LIMIT[\\s]+UP[\\s]+[0-9]+[\\s]+DOWN[\\s]+[0-9]+[\\s]+SPEED[\\s]+[0-9]+[\\s]+ACCELERATION[\\s]+[0-9]+"));
+		//Might have to change if not FOWLER
+		list.add(Pattern.compile("CREATE[\\s]+FOWLER[\\s]+FLAP[\\s]+[0-9A-Z]+[\\s]+WITH[\\s]+LIMIT[\\s]+[0-9]+[\\s]+SPEED[\\s]+[0-9]+[\\s]+ACCELERATION[\\s]+[0-9]+"));
+		//Might have to adjust
+		list.add(Pattern.compile("CREATE[\\s]+ENGINE[\\s]+[0-9A-Z]+[\\s]+WITH[\\s]+SPEED[\\s]+[0-9]+[\\s]+ACCELERATION[\\s]+[0-9]+"));
+		list.add(Pattern.compile("CREATE[\\s]+NOSE[\\s]+GEAR[\\s]+[0-9A-Z]+[\\s]+WITH[\\s]+SPEED[\\s]+[0-9]+[\\]s+ACCELERATION[\\s]+[0-9]+"));
+		//Structural REGEX
+		list.add(Pattern.compile("DECLARE[\\s]+RUDDER[\\s]+CONTROLLER[\\s]+[0-9A-Z]+[\\s]+WITH[\\s]+RUDDER[0-9A-Z]+"));
+		list.add(Pattern.compile("DECLARE[\\s]+ELEVATOR[\\s]+CONTROLLER[\\s]+[0-9A-Z]+[\\s]+WITH[\\s]+ELEVATORS[\\s]+[0-9A-Z]+[\\s]+[0-9A-Z]+"));
+		//must check for n number of id's confused on how
+		list.add(Pattern.compile("DECLARE[\\s]+AILERON[\\s]+CONTROLLER[\\s]+[0-9A-Z]+[\\s]+WITH[\\s]+AILERONS[\\s]+[0-9A-Z]+[\\s]+PRIMARY[0-9A-Z]+"));
+		list.add(Pattern.compile("DECLARE[\\s]+FLAP[\\s]+CONTROLLER[\\s]+[0-9A-Z]+[\\s]+WITH[\\s]+FLAPS[\\s]+[0-9A-Z]+"));
+		list.add(Pattern.compile("DECLARE[\\s]+ENGINE[\\s]+CONTROLLER[\\s]+[0-9A-Z]+[\\s]+WITH[\\s]+[ENGINE|ENGINES][\\s]+[0-9A-Z]+"));
+		list.add(Pattern.compile("DECLARE[\\s]+GEAR[\\s]+CONTROLLER[\\s]+[0-9A-Z]+[\\s]+WITH[\\s]+GEAR[\\s]+NOSE[\\s]+[0-9A-Z]+[\\s]+MAIN[\\s]+[0-9A-Z]+[\\s]+[0-9A-Z]+"));
+		//Behavioral REGEX
+		list.add(Pattern.compile("DO[\\s]+[0-9A-Z]+[\\s]+DEFLECT[\\s]+RUDDER[\\s]+[UP|DOWN]"));
+		list.add(Pattern.compile("DO[\\s]+[0-9A-Z]+[\\s]+DEFLECT[\\s]+ELEVATOR[\\s]+[0-9A-Z]+[\\s]+[UP|DOWN]"));
+		list.add(Pattern.compile("DO[\\s]+[0-9A-Z]+[\\s]+DEFLECT[\\s]+AILERONS[\\s]+[0-9A-Z]+[\\s]+[UP|DOWN]"));
+		list.add(Pattern.compile("DO[\\s]+[0-9A-Z]+[\\s]+SPEED[\\s]+BRAKE[\\s]+[ON|OFF]"));
+		list.add(Pattern.compile("DO[\\s]+[0-9A-Z]+[\\s]+DEFLECT[\\s]+FLAP[\\s]+[0-9A-Z]+"));
+		list.add(Pattern.compile("DO[\\s]+[0-9A-Z]+[\\s]+SET[\\s]+POWER[\\s]+[0-9]+"));
+		list.add(Pattern.compile("DO[\\s]+[0-9A-Z]+[\\s]+GEAR[\\s]+[UP|DOWN]"));
+		//Misc. REGEX
+		list.add(Pattern.compile("@[0-9A-Z]+"));
+		list.add(Pattern.compile("@[0-9A-Z]+[\\s]+[0-9A-Z]+"));
+		for(Pattern pattern: list){
+		   Matcher matcher = pattern.matcher(command);
+		   if(matcher.find())
+			  return true;
+		}
+		return false;
+	}
+
 	/**
 	 * Do the parsing.
 	 */
 	public void parse() {
 		String actionWord = this.text.split()[0].toUpperCase().trim();
 		CommandParser parser;
+		boolean action = isCommand(actionWord);
+		if(actionWord) {
 		
 		if (actionWord.equals("CREATE")) 
 			parser = new CommandParserCreational(actionSet, text);
@@ -58,7 +100,10 @@ public class CommandParser {
 		
 		else
 			throw new IllegalArgumentException("Parser was not given a correct action word");					
-		
+		}
+		else{
+			System.out.println("Error in command input");
+		}
 
 		parser.parse();
 
