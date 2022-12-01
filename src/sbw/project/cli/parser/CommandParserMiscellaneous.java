@@ -33,7 +33,7 @@ public class CommandParserMiscellaneous extends CommandParser{
      */
     //@?
     public void clock (ActionSet as, String[] textArr){
-        double rate = textArr[1]; //might need to adjust, also not entirely sure what Rate rate is asking for
+        double rate = Double.parseDouble(textArr[1]); //might need to adjust, also not entirely sure what Rate rate is asking for
         as.submitCommand().CommandDoSetClockRate(rate);
     }
 
@@ -52,7 +52,7 @@ public class CommandParserMiscellaneous extends CommandParser{
      * This calls submitCommand() with an instance of CommandDoWait(Rate rate).
      */
     public void wait(ActionSet as, String[] textArr) {
-        double rate = textArr[1]; //Might need to adjust
+        double rate = Double.parseDouble(textArr[1]); //Might need to adjust
         as.submitCommand().CommandDoWait(rate);
     }
 }

@@ -42,7 +42,7 @@ public class CommandParserBehavioral extends CommandParser{
      */
     public void rudder(ActionSet ac, String[] textArr) {
         Identifier id = new Identifier(textArr[1]);
-        double angle = textArr[4]; /////////////////Might need to adjust to int or float. Also assuming the angle is already integer.parsed
+        double angle = Double.parseDouble(textArr[4]); /////////////////Might need to adjust to int or float. Also assuming the angle is already integer.parsed
         String dir = textArr[5];
         //True if right
         if(dir.equalsIgnoreCase("RIGHT")){
@@ -60,7 +60,7 @@ public class CommandParserBehavioral extends CommandParser{
      */
     public void elevator(ActionSet ac, String[] textArr) {
         Identifier id = new Identifier(textArr[1]);
-        double angle = textArr[4]; //////////////////Might need to adjust to make int or float. Also assuming the angle is already integer.parsed
+        double angle = Double.parseDouble(textArr[4]); //////////////////Might need to adjust to make int or float. Also assuming the angle is already integer.parsed
         String dir = textArr[5];
         //True if down
         if(dir.equalsIgnoreCase("UP")){
@@ -80,7 +80,7 @@ public class CommandParserBehavioral extends CommandParser{
      */
     public void aileron(ActionSet ac, String[] textArr) {
         Identifier id = new Identifier(textArr[1]);
-        double angle = textArr[4]; //////////////////Might need to adjust to make int or float. Also assuming the angle is already integer.parsed
+        double angle = Double.parseDouble(textArr[4]); //////////////////Might need to adjust to make int or float. Also assuming the angle is already integer.parsed
         String dir = textArr[5];
         //True if down
         if(dir.equalsIgnoreCase("UP")){
@@ -99,7 +99,7 @@ public class CommandParserBehavioral extends CommandParser{
      */
     public void flap(ActionSet ac, String[] textArr) {
         Identifier id = new Identifier(textArr[1]);
-        double pos = textArr[4]; //Might need to adjust if percent is dif
+        double pos = Double.parseDouble(textArr[4]); //Might need to adjust if percent is dif
         ac.submitCommand().CommandDoSetFlaps(id,pos);
     }
 
@@ -110,7 +110,7 @@ public class CommandParserBehavioral extends CommandParser{
      */
     public void engine(ActionSet ac, String[] textArr){
         Identifier id = new Identifier(textArr[1]);
-        double pow = textArr[4]; //////Might need to adjust
+        double pow = Double.parseDouble(textArr[4]); //////Might need to adjust
         ac.submitCommand().CommandDoSetEnginePowerAll(id,pow);
     }
 
